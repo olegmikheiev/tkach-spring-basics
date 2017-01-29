@@ -7,26 +7,26 @@
             http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <bean id="eventLogger"
-          class="com.appsom.tkach.spring.first.loggers.ConsoleEventLogger"/>
+          class="com.appsom.tkach.spring.core.loggers.ConsoleEventLogger"/>
 
     <bean id="consoleEventLogger"
-          class="com.appsom.tkach.spring.first.loggers.ConsoleEventLogger"/>
+          class="com.appsom.tkach.spring.core.loggers.ConsoleEventLogger"/>
 
     <bean id="fileEventLogger"
-          class="com.appsom.tkach.spring.first.loggers.FileEventLogger"
+          class="com.appsom.tkach.spring.core.loggers.FileEventLogger"
           init-method="init">
         <constructor-arg value="logs/eventLogs.log"/>
     </bean>
 
     <bean id="cacheFileEventLogger"
-          class="com.appsom.tkach.spring.first.loggers.CacheFileEventLogger"
+          class="com.appsom.tkach.spring.core.loggers.CacheFileEventLogger"
           parent="fileEventLogger"
           destroy-method="onDestroy">
         <constructor-arg value="2"/>
     </bean>
 
     <bean id="combinedEventLogger"
-          class="com.appsom.tkach.spring.first.loggers.CombinedEventLogger">
+          class="com.appsom.tkach.spring.core.loggers.CombinedEventLogger">
         <constructor-arg>
             <list>
                 <ref bean="consoleEventLogger"/>

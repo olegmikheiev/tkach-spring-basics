@@ -9,7 +9,7 @@
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
-    <bean id="client" class="com.appsom.tkach.spring.first.client.Client">
+    <bean id="client" class="com.appsom.tkach.spring.core.client.Client">
         <constructor-arg index="0" value="1"/>
         <constructor-arg index="1" value="John Smith"/>
         <property name="greeting" value="Hello there!"/>

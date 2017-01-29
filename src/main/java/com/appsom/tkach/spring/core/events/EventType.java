@@ -1,4 +1,4 @@
-package com.appsom.tkach.spring.first.events;
+package com.appsom.tkach.spring.core.events;
 
 public enum EventType {
     INFO,

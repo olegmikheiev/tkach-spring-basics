@@ -2,28 +2,44 @@ group 'com.appsom.tkach'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
-def $springVersion = '4.3.5.RELEASE'
+def junitVersion = '4.12'
+def springVersion = '4.3.5.RELEASE'
+def aspectjVersion = '1.8.10'
+def lombokVersion = '1.16.12'
+def commonsioVersion = '2.5'
+
+def mockitoVersion = '2.2.12'
+def derbyVersion = '10.13.1.1'
 
 dependencies {
     // Spring
-    compile group: 'org.springframework', name: 'spring-context', version: $springVersion
-    compile group: 'org.springframework', name: 'spring-context-support', version: $springVersion
-    compile group: 'org.springframework', name: 'spring-tx', version: $springVersion
-    compile group: 'org.springframework', name: 'spring-jdbc', version: $springVersion
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context-support', version: springVersion
+    compile group: 'org.springframework', name: 'spring-tx', version: springVersion
+    compile group: 'org.springframework', name: 'spring-jdbc', version: springVersion
 
-    // Lombok
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.12'
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: aspectjVersion
+    compile group: 'org.aspectj', name: 'aspectjrt', version: aspectjVersion
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
 
     // Apache libs
-    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile group: 'commons-io', name: 'commons-io', version: commonsioVersion
+    compile group: 'org.apache.derby', name: 'derby', version: derbyVersion
 
+    // Lombok
+    compile group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    // Testing
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+    testCompile group: 'org.mockito', name: 'mockito-core', version: mockitoVersion
 }

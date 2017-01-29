@@ -1,10 +1,10 @@
-package com.appsom.tkach.spring.first;
+package com.appsom.tkach.spring.core;
 
-import com.appsom.tkach.spring.first.client.Client;
-import com.appsom.tkach.spring.first.events.Event;
-import com.appsom.tkach.spring.first.events.EventType;
-import com.appsom.tkach.spring.first.loggers.EventLogger;
-import com.appsom.tkach.spring.first.loggers.LoggersConfig;
+import com.appsom.tkach.spring.core.events.Event;
+import com.appsom.tkach.spring.core.events.EventType;
+import com.appsom.tkach.spring.core.loggers.EventLogger;
+import com.appsom.tkach.spring.core.client.Client;
+import com.appsom.tkach.spring.core.spring.ApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -48,11 +48,6 @@ public class ApplicationImpl {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-        ctx.scan("com.appsom.tkach.spring.first");
-
-        ctx.register(LoggersConfig.class);
-
-        ctx.refresh();
 
         ApplicationImpl app = (ApplicationImpl) ctx.getBean("app");
 

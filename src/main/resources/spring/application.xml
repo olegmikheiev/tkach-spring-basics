@@ -15,7 +15,7 @@
     <import resource="events.xml"/>
     <import resource="loggers.xml"/>
 
-    <bean id="app" class="com.appsom.tkach.spring.first.ApplicationImpl">
+    <bean id="app" class="com.appsom.tkach.spring.core.ApplicationImpl">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
         <constructor-arg>

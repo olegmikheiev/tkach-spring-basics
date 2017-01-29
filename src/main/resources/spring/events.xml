@@ -6,7 +6,7 @@
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean id="event" class="com.appsom.tkach.spring.first.events.Event"
+    <bean id="event" class="com.appsom.tkach.spring.core.events.Event"
           scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>

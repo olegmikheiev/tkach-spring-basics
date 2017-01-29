@@ -1,25 +1,39 @@
-package com.appsom.tkach.spring.first.loggers;
+package com.appsom.tkach.spring.core.loggers;
 
-import com.appsom.tkach.spring.first.events.Event;
+import com.appsom.tkach.spring.core.events.Event;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component("cacheFileEventLogger")
+@Component
+@NoArgsConstructor
 public class CacheFileEventLogger extends FileEventLogger {
-    @Value("2")
+    @Value("${cache.size:5}")
     private int cacheSize;
-    @Autowired
+
     private List<Event> cache;
 
     public CacheFileEventLogger(String fileName, int cacheSize) {
         super(fileName);
         this.cacheSize = cacheSize < 1 ? 1 : cacheSize;
-        cache = new ArrayList<>(cacheSize);
+        // initCache();
+    }
+
+    @PostConstruct
+    public void initCache() {
+        this.cache = new ArrayList<>(cacheSize);
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        if (!cache.isEmpty())
+            writeEventsFromCache();
     }
 
     @Override
@@ -31,13 +45,13 @@ public class CacheFileEventLogger extends FileEventLogger {
         }
     }
 
-    @PreDestroy
-    public void onDestroy() {
-        if (!cache.isEmpty())
-            writeEventsFromCache();
-    }
-
     private void writeEventsFromCache() {
         cache.forEach(super::logEvent);
+    }
+
+    @Value("#{fileEventLogger.name + ' with cache'}")
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 }
