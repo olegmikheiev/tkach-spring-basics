@@ -1,0 +1,29 @@
+group 'com.appsom.tkach'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+def $springVersion = '4.3.5.RELEASE'
+
+dependencies {
+    // Spring
+    compile group: 'org.springframework', name: 'spring-context', version: $springVersion
+    compile group: 'org.springframework', name: 'spring-context-support', version: $springVersion
+    compile group: 'org.springframework', name: 'spring-tx', version: $springVersion
+    compile group: 'org.springframework', name: 'spring-jdbc', version: $springVersion
+
+    // Lombok
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.12'
+
+    // Apache libs
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

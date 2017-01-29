@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <bean id="eventLogger"
+          class="com.appsom.tkach.spring.first.loggers.ConsoleEventLogger"/>
+
+    <bean id="consoleEventLogger"
+          class="com.appsom.tkach.spring.first.loggers.ConsoleEventLogger"/>
+
+    <bean id="fileEventLogger"
+          class="com.appsom.tkach.spring.first.loggers.FileEventLogger"
+          init-method="init">
+        <constructor-arg value="logs/eventLogs.log"/>
+    </bean>
+
+    <bean id="cacheFileEventLogger"
+          class="com.appsom.tkach.spring.first.loggers.CacheFileEventLogger"
+          parent="fileEventLogger"
+          destroy-method="onDestroy">
+        <constructor-arg value="2"/>
+    </bean>
+
+    <bean id="combinedEventLogger"
+          class="com.appsom.tkach.spring.first.loggers.CombinedEventLogger">
+        <constructor-arg>
+            <list>
+                <ref bean="consoleEventLogger"/>
+                <ref bean="fileEventLogger"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
