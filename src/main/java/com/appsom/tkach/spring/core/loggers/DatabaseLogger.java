@@ -1,4 +1,4 @@
-package com.appsom.tkach.spring.core;
+package com.appsom.tkach.spring.core.loggers;
 
 import com.appsom.tkach.spring.core.events.Event;
 import com.appsom.tkach.spring.core.loggers.AbstractEventLogger;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class DatabaseLogger extends AbstractEventLogger {
 
     private static final String SQL_ERROR_STATE_SCHEMA_EXISTS = "X0Y68";
@@ -49,7 +51,7 @@ public class DatabaseLogger extends AbstractEventLogger {
     @Override
     public void logEvent(Event event) {
         jdbcTemplate.update(
-                "INSERT INTO t_event (id, date, msg) VALUES (?, ?, ?)",
+                "INSERT INTO t_event (id, date, message) VALUES (?, ?, ?)",
                 event.getId(), event.getDate(), event.toString());
         System.out.println(String.format("Event with id <%d> saved into DB.", event.getId()));
     }

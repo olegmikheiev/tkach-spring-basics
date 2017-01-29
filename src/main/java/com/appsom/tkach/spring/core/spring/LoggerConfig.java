@@ -13,7 +13,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 @Configuration
-public class LoggersConfig {
+public class LoggerConfig {
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigIn() {
@@ -26,7 +26,7 @@ public class LoggersConfig {
     @Resource(name = "fileEventLogger")
     private EventLogger fileEventLogger;
 
-    @Resource(name = "dbLogger")
+    @Resource(name = "databaseLogger")
     private EventLogger dbLogger;
 
     @Resource(name = "combinedEventLogger")

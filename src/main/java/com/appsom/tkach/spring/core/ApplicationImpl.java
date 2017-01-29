@@ -6,7 +6,7 @@ import com.appsom.tkach.spring.core.loggers.EventLogger;
 import com.appsom.tkach.spring.core.client.Client;
 import com.appsom.tkach.spring.core.spring.ApplicationConfig;
 import com.appsom.tkach.spring.core.spring.DatabaseConfig;
-import com.appsom.tkach.spring.core.spring.LoggersConfig;
+import com.appsom.tkach.spring.core.spring.LoggerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -21,7 +21,7 @@ public class ApplicationImpl {
     @Autowired
     private Client client;
 
-    @Value("#{ T(com.appsom.tkach.spring.core.events.Event).isDaty(8, 17) ? " +
+    @Value("#{ T(com.appsom.tkach.spring.core.events.Event).isDailyTime(8, 17) ? " +
             " consoleEventLogger : cacheFileEventLogger }")
     private EventLogger defaultLogger;
 
@@ -31,7 +31,7 @@ public class ApplicationImpl {
     @Value("#{ 'Hello user ' + " +
             "(systemProperties['os.name'].contains('Windows') ? " +
             " systemEnvironment['USERNAME'] : systemEnvironment['USER'] ) + " +
-            " '. Default logger is ' + app.defaultLogger.name }")
+            " '. Default logger is ' + App.defaultLogger.name }")
     private String startupMessage;
 
     public ApplicationImpl() {}
@@ -64,7 +64,7 @@ public class ApplicationImpl {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(ApplicationConfig.class);
-        ctx.register(LoggersConfig.class);
+        ctx.register(LoggerConfig.class);
         ctx.register(DatabaseConfig.class);
         ctx.scan("com.appsom.tkach.spring.core");
         ctx.refresh();

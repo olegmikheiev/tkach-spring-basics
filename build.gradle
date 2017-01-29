@@ -14,7 +14,7 @@ repositories {
 def junitVersion = '4.12'
 def springVersion = '4.3.5.RELEASE'
 def aspectjVersion = '1.8.10'
-def lombokVersion = '1.16.12'
+//def lombokVersion = '1.16.12'
 def commonsioVersion = '2.5'
 
 def mockitoVersion = '2.2.12'
@@ -37,7 +37,7 @@ dependencies {
     compile group: 'org.apache.derby', name: 'derby', version: derbyVersion
 
     // Lombok
-    compile group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    //compile group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
     // Testing
     testCompile group: 'junit', name: 'junit', version: junitVersion

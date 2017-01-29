@@ -1,8 +1,6 @@
 package com.appsom.tkach.spring.core.loggers;
 
 import com.appsom.tkach.spring.core.events.Event;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@NoArgsConstructor
 public class CacheFileEventLogger extends FileEventLogger {
     @Value("${cache.size:5}")
     private int cacheSize;
 
     private List<Event> cache;
+
+    public CacheFileEventLogger() {}
 
     public CacheFileEventLogger(String fileName, int cacheSize) {
         super(fileName);

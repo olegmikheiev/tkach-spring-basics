@@ -1,7 +1,6 @@
 package com.appsom.tkach.spring.core.loggers;
 
 import com.appsom.tkach.spring.core.events.Event;
-import lombok.NoArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -11,12 +10,14 @@ import java.io.File;
 import java.io.IOException;
 
 @Component
-@NoArgsConstructor
 public class FileEventLogger extends AbstractEventLogger {
     private File file;
 
     @Value("${events.file:target/events.log}")
     private String fileName;
+
+    public FileEventLogger() {
+    }
 
     public FileEventLogger(String fileName) {
         this.fileName = fileName;
@@ -25,10 +26,12 @@ public class FileEventLogger extends AbstractEventLogger {
     @PostConstruct
     private void init() throws IOException {
         file = new File(fileName);
-        if (!file.exists()) ;
+        if (file.exists() && !file.canWrite()) {
+            throw new IllegalArgumentException("Cannot write to file " + fileName);
+        } else if (!file.exists()) {
+            file.getParentFile().mkdirs();
             file.createNewFile();
-        if (!file.canWrite())
-            throw new IOException(String.format("Logs cannot be written into file <%s>.", fileName));
+        }
     }
 
     @Override
